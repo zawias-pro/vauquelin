@@ -1,6 +1,7 @@
 {
   "name": "@zawias-pro/vauquelin",
   "version": "0.1.0",
+  "license": "MIT",
   "dependencies": {
     "@material-ui/core": "^3.9.2",
     "react": "^16.8.4",
