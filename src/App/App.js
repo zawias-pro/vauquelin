@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import FormHelperText from '@material-ui/core/FormHelperText';
+import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
@@ -56,6 +56,15 @@ const App = () => (
                 <FormControlLabel value="second" control={<Radio/>} label="second"/>
                 <FormControlLabel value="third" control={<Radio/>} label="third"/>
               </RadioGroup>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={false}
+                    onChange={() => {}}
+                  />
+                }
+                label="Use custom API key"
+              />
               <TextField
                 label="Custom API key"
                 fullWidth
