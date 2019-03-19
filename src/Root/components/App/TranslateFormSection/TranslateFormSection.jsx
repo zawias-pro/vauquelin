@@ -1,15 +1,16 @@
 import React from 'react'
+import Radio from '@material-ui/core/Radio'
+import Paper from '@material-ui/core/Paper'
+import Switch from '@material-ui/core/Switch'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
-import Radio from '@material-ui/core/Radio'
-import RadioGroup from '@material-ui/core/RadioGroup'
-import Switch from '@material-ui/core/Switch'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import FormControl from '@material-ui/core/FormControl'
 import FormLabel from '@material-ui/core/FormLabel'
+import RadioGroup from '@material-ui/core/RadioGroup'
+import FormControl from '@material-ui/core/FormControl'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
 
-const TranslateForm = () => (
-  <>
+const TranslateFormSection = () => (
+  <Paper style={{ padding: 16 }}>
     <div style={{ textAlign: 'center', marginBottom: 24 }}>
       <Button variant="contained" color="primary">
         Translate
@@ -45,7 +46,7 @@ const TranslateForm = () => (
         margin="normal"
       />
     </FormControl>
-  </>
+  </Paper>
 )
 
-export { TranslateForm }
+export { TranslateFormSection }
