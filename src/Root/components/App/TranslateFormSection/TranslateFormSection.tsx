@@ -1,5 +1,4 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
 import Radio from '@material-ui/core/Radio'
 import Paper from '@material-ui/core/Paper'
 import Switch from '@material-ui/core/Switch'
@@ -9,56 +8,60 @@ import FormLabel from '@material-ui/core/FormLabel'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControl from '@material-ui/core/FormControl'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
+import {ChangeEvent} from "react";
+import { Provider } from "../../../../types/Provider";
 
-class TranslateFormSection extends React.Component {
-  render() {
-    const { provider, providerOnChange, apiKey, apiKeyOnChange } = this.props
+interface TranslateFormSectionProps {
+    provider: Provider;
+    providerOnChange: (event: ChangeEvent) => void;
+    apiKey: string;
+    apiKeyOnChange: (event: ChangeEvent) => void;
+}
 
-    return (
-      <Paper style={{ padding: 16 }}>
-        <div style={{ textAlign: 'center', marginBottom: 24 }}>
-          <Button variant="contained" color="primary">
-              Translate
-          </Button>
+const TranslateFormSection: React.FunctionComponent<TranslateFormSectionProps> = ({
+    provider,
+    providerOnChange,
+    apiKey,
+    apiKeyOnChange
+}) => (
+    <Paper style={{padding: 16}}>
+        <div style={{textAlign: 'center', marginBottom: 24}}>
+            <Button variant="contained" color="primary">
+                Translate
+            </Button>
         </div>
         <FormControl>
-          <FormLabel component="legend">Translation provider</FormLabel>
-          <RadioGroup
-            aria-label="Translation provider"
-            value={provider}
-            onChange={providerOnChange}
-          >
-            <FormControlLabel value="yandex" control={<Radio/>}
-              label="Yandex"/>
-            <FormControlLabel value="bing" control={<Radio/>} label="Bing"/>
-            <FormControlLabel value="google" control={<Radio/>}
-              label="Google"/>
-          </RadioGroup>
-          <FormControlLabel
-            control={
-              <Switch
-                checked={false}
-                onChange={() => {}}
-              />
-            }
-            label="Use custom API key"
-          />
-          <TextField
-            label="Custom API key"
-            fullWidth
-            margin="normal"
-            value={apiKey}
-            onChange={apiKeyOnChange}
-          />
+            <FormLabel component="legend">Translation provider</FormLabel>
+            <RadioGroup
+                aria-label="Translation provider"
+                value={provider}
+                onChange={providerOnChange}
+            >
+                <FormControlLabel value="yandex" control={<Radio/>}
+                                  label="Yandex"/>
+                <FormControlLabel value="bing" control={<Radio/>} label="Bing"/>
+                <FormControlLabel value="google" control={<Radio/>}
+                                  label="Google"/>
+            </RadioGroup>
+            <FormControlLabel
+                control={
+                    <Switch
+                        checked={false}
+                        onChange={() => {
+                        }}
+                    />
+                }
+                label="Use custom API key"
+            />
+            <TextField
+                label="Custom API key"
+                fullWidth
+                margin="normal"
+                value={apiKey}
+                onChange={apiKeyOnChange}
+            />
         </FormControl>
-      </Paper>
-    )
-  }
-}
-
-TranslateFormSection.propTypes = {
-  provider: PropTypes.any,
-  providerOnChange: PropTypes.any,
-}
+    </Paper>
+)
 
 export { TranslateFormSection }

@@ -1,12 +1,22 @@
-import React, { Component } from 'react'
+import * as React from 'react'
+import { ChangeEvent } from 'react';
 import Grid from '@material-ui/core/Grid'
 
 import { TopBar } from './TopBar'
 import { InputSection } from './InputSection'
 import { OutputSection } from './OutputSection'
 import { TranslateFormSection } from './TranslateFormSection'
+import {Provider} from "../../../types/Provider";
 
-class App extends Component {
+interface AppState {
+  inputJson: string;
+  outputJson: string;
+  provider: Provider;
+  useCustomApiKey: boolean;
+  apiKey: string;
+}
+
+class App extends React.Component<{}, AppState> {
   state = {
     inputJson: '',
     outputJson: '',
@@ -15,20 +25,20 @@ class App extends Component {
     apiKey: 'key',
   };
 
-  onInputChange = (event) => {
+  onInputChange = (event: ChangeEvent) => {
     this.setState({
       inputJson: event.target.value,
       outputJson: event.target.value,
     })
   };
 
-  providerOnChange = (event) => {
+  providerOnChange = (event: ChangeEvent) => {
     this.setState({
       provider: event.target.value,
     })
   };
 
-  apiKeyOnChange = (event) => {
+  apiKeyOnChange = (event: ChangeEvent) => {
     this.setState({
       useCustomApiKey: true,
       apiKey: event.target.apiKey,

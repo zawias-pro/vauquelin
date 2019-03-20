@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 
-const TopBar = () => {
+const TopBar: React.FunctionComponent = () => {
   const { t } = useTranslation()
 
   return (
