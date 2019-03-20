@@ -10,12 +10,28 @@ class App extends Component {
   state = {
     inputJson: '',
     outputJson: '',
-  }
+    provider: 'yandex',
+    useCustomApiKey: false,
+    apiKey: 'key',
+  };
 
   onInputChange = (event) => {
     this.setState({
       inputJson: event.target.value,
       outputJson: event.target.value,
+    })
+  };
+
+  providerOnChange = (event) => {
+    this.setState({
+      provider: event.target.value,
+    })
+  };
+
+  apiKeyOnChange = (event) => {
+    this.setState({
+      useCustomApiKey: true,
+      apiKey: event.target.apiKey,
     })
   }
 
@@ -25,10 +41,19 @@ class App extends Component {
       <div style={{ margin: 30 }}>
         <Grid container spacing={24}>
           <Grid item xs={5}>
-            <InputSection value={this.state.inputJson} onChange={this.onInputChange} />
+            <InputSection
+              value={this.state.inputJson}
+              onChange={this.onInputChange}
+            />
           </Grid>
           <Grid item xs={2}>
-            <TranslateFormSection />
+            <TranslateFormSection
+              provider={this.state.provider}
+              providerOnChange={this.providerOnChange}
+              apiKey={this.state.apiKey}
+              apiKeyOnChange={this.apiKeyOnChange}
+              useCustomApiKey={this.state.useCustomApiKey}
+            />
           </Grid>
           <Grid item xs={5}>
             <OutputSection value={this.state.outputJson}/>
