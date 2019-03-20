@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import PropTypes from 'prop-types'
 import Radio from '@material-ui/core/Radio'
 import Paper from '@material-ui/core/Paper'

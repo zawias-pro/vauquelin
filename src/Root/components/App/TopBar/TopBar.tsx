@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import { useTranslation } from 'react-i18next'
 import Toolbar from '@material-ui/core/Toolbar'
