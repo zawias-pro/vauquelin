@@ -1,11 +1,10 @@
 import * as React from 'react'
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField'
-import {ChangeEvent} from "react";
 
 interface InputSectionProps {
-  value: string;
-  onChange: (event: ChangeEvent) => void;
+  value: string
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const InputSection: React.FunctionComponent<InputSectionProps> = ({
