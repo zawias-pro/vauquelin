@@ -8,11 +8,11 @@ import FormLabel from '@material-ui/core/FormLabel'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControl from '@material-ui/core/FormControl'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
-import { Provider } from '../../types/Provider'
+import { Provider, providers } from '../../../types/Provider'
 
 interface TranslateFormSectionProps {
   provider: Provider
-  providerOnChange: (event: React.ChangeEvent<{}>) => void
+  providerOnChange: (event: React.ChangeEvent<{}>, value: string) => void
   apiKey: string
   apiKeyOnChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   useCustomApiKey: boolean
@@ -27,7 +27,7 @@ const TranslateFormSection: React.FunctionComponent<TranslateFormSectionProps> =
   useCustomApiKey,
   useCustomApiKeyOnChange,
 }) => {
-  const useCustomApiKeySwitcher = <Switch checked={useCustomApiKey} onChange={useCustomApiKeyOnChange} />
+  const useCustomApiKeySwitcher = <Switch checked={useCustomApiKey} onChange={useCustomApiKeyOnChange}/>
 
   return (
     <Paper style={{padding: 16}}>
@@ -40,20 +40,12 @@ const TranslateFormSection: React.FunctionComponent<TranslateFormSectionProps> =
         <FormLabel component="data">Translation provider</FormLabel>
         <RadioGroup
           aria-label="Translation provider"
-          value={provider}
+          value={provider.id}
           onChange={providerOnChange}
         >
-          <FormControlLabel
-            value="yandex"
-            control={<Radio/>}
-            label="Yandex"
-          />
-          <FormControlLabel value="bing" control={<Radio/>} label="Bing"/>
-          <FormControlLabel
-            value="google"
-            control={<Radio/>}
-            label="Google"
-          />
+          <FormControlLabel value={providers.yandex.id} control={<Radio/>} label={providers.yandex.name} />
+          <FormControlLabel value={providers.microsoft.id} control={<Radio/>} label={providers.microsoft.name} />
+          <FormControlLabel value={providers.google.id} control={<Radio/>} label={providers.google.name} />
         </RadioGroup>
         <FormControlLabel
           control={useCustomApiKeySwitcher}

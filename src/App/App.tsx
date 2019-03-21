@@ -1,13 +1,14 @@
 import * as React from 'react'
 import Grid from '@material-ui/core/Grid'
 
-import { TopBar } from './TopBar'
+import { TopBar } from './components/TopBar'
 import { DEFAULT_PROVIDER } from '../config'
 import { Provider } from '../types/Provider'
-import { InputSection } from './InputSection'
-import { OutputSection } from './OutputSection'
 import { i18nInit } from '../translations/i18nInit'
-import { TranslateFormSection } from './TranslateFormSection'
+import { getProviderById } from './getProviderById'
+import { InputSection } from './components/InputSection'
+import { OutputSection } from './components/OutputSection'
+import { TranslateFormSection } from './components/TranslateFormSection'
 
 interface AppState {
   inputJson: string
@@ -39,10 +40,9 @@ class App extends React.Component<{}, AppState> {
     })
   }
 
-  public providerOnChange = (event: React.ChangeEvent<{}>): void => {
+  public providerOnChange = (event: React.ChangeEvent<{}>, value: string): void => {
     this.setState({
-      // @ts-ignore
-      provider: event.target.value as Provider,
+      provider: getProviderById(value),
     })
   }
 
