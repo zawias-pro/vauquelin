@@ -6,10 +6,10 @@ import { DEFAULT_PROVIDER } from '../config'
 import { Provider } from '../types/Provider'
 import { i18nInit } from '../translations/i18nInit'
 import { getProviderById } from './getProviderById'
+import { TranslateService } from './TranslateService'
 import { InputSection } from './components/InputSection'
 import { OutputSection } from './components/OutputSection'
 import { TranslateFormSection } from './components/TranslateFormSection'
-import { TranslateService } from './TranslateService'
 
 interface AppState {
   inputJson: string
@@ -21,17 +21,20 @@ interface AppState {
 
 class App extends React.Component<{}, AppState> {
   public state = {
-    inputJson: '',
+    inputJson: 'a b c d',
     outputJson: '',
     provider: DEFAULT_PROVIDER,
     useCustomApiKey: false,
     apiKey: '',
   }
 
+  private translator: TranslateService
+
   constructor(props: {}) {
     super(props)
 
     i18nInit()
+    this.translator = new TranslateService()
   }
 
   public onInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -60,10 +63,10 @@ class App extends React.Component<{}, AppState> {
   }
 
   public translateOnClick = () => {
-    const translator = new TranslateService()
+    new TranslateService().translate(this.state.inputJson)
 
     this.setState(prevState => ({
-      outputJson: translator.translate(prevState.inputJson),
+      outputJson: '',
     }))
   }
 
