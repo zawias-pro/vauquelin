@@ -17,6 +17,7 @@ interface TranslateFormSectionProps {
   apiKeyOnChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   useCustomApiKey: boolean
   useCustomApiKeyOnChange: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void
+  translateOnClick: () => void
 }
 
 const TranslateFormSection: React.FunctionComponent<TranslateFormSectionProps> = ({
@@ -26,13 +27,18 @@ const TranslateFormSection: React.FunctionComponent<TranslateFormSectionProps> =
   apiKeyOnChange,
   useCustomApiKey,
   useCustomApiKeyOnChange,
+  translateOnClick,
 }) => {
   const useCustomApiKeySwitcher = <Switch checked={useCustomApiKey} onChange={useCustomApiKeyOnChange}/>
 
   return (
     <Paper style={{padding: 16}}>
       <div style={{textAlign: 'center', marginBottom: 24}}>
-        <Button variant="contained" color="primary">
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={translateOnClick}
+        >
           Translate
         </Button>
       </div>

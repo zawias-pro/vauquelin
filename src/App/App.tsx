@@ -9,6 +9,7 @@ import { getProviderById } from './getProviderById'
 import { InputSection } from './components/InputSection'
 import { OutputSection } from './components/OutputSection'
 import { TranslateFormSection } from './components/TranslateFormSection'
+import { TranslateService } from './TranslateService'
 
 interface AppState {
   inputJson: string
@@ -36,7 +37,6 @@ class App extends React.Component<{}, AppState> {
   public onInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     this.setState({
       inputJson: event.target.value,
-      outputJson: event.target.value,
     })
   }
 
@@ -59,6 +59,14 @@ class App extends React.Component<{}, AppState> {
     })
   }
 
+  public translateOnClick = () => {
+    const translator = new TranslateService()
+
+    this.setState(prevState => ({
+      outputJson: translator.translate(prevState.inputJson),
+    }))
+  }
+
   public render() {
     return (
       <>
@@ -79,6 +87,7 @@ class App extends React.Component<{}, AppState> {
                 apiKeyOnChange={this.apiKeyOnChange}
                 useCustomApiKey={this.state.useCustomApiKey}
                 useCustomApiKeyOnChange={this.useCustomApiKeyOnChange}
+                translateOnClick={this.translateOnClick}
               />
             </Grid>
             <Grid item xs={5}>
