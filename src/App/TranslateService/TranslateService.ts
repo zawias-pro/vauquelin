@@ -7,7 +7,8 @@ export interface ITranslateService {
 }
 
 class TranslateService implements ITranslateService {
-  public translate = (text: string): void => {
+  // @ts-ignore
+  public translate = (text: string, onFinish: any): void => {
     const word$ = from(text.split(' '))
 
     const request$ = word$.pipe(
@@ -21,7 +22,11 @@ class TranslateService implements ITranslateService {
 
     const count$ = request$.pipe(count())
 
-    request$.subscribe(x => console.log('request$:', x))
+    request$.subscribe(x => {
+      onFinish(x)
+
+      return console.log('request$:', x)
+    })
 
     count$.subscribe(x => console.log('count$:', x))
 

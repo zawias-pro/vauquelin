@@ -63,7 +63,11 @@ class App extends React.Component<{}, AppState> {
   }
 
   public translateOnClick = () => {
-    new TranslateService().translate(this.state.inputJson)
+    new TranslateService().translate(this.state.inputJson, (response: any) => {
+      this.setState({
+        outputJson: response,
+      })
+    })
 
     this.setState(prevState => ({
       outputJson: '',
