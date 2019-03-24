@@ -1,1 +1,1 @@
-export { JSONHashValuesService } from './JSONHashService'
+export { JSONHashValuesService } from './JSONHashValuesService'

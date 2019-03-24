@@ -1,4 +1,10 @@
 import { objectToArrayOfStrings } from './objectToArrayOfStrings'
+import hasha from 'hasha'
+
+interface IKeyValue {
+  key: string
+  value: string
+}
 
 export class JSONHashValuesService {
   public static isJSON = (input: string) => {
@@ -11,30 +17,23 @@ export class JSONHashValuesService {
     }
   }
 
-  private NEWLINE_REGEXP: RegExp = /\n/
+  private NEWLINE_REGEXP: RegExp = /\r?\n|\r/g
   private input: string
 
   constructor(input: string) {
     this.input = input
   }
 
-  public getHashValues = (): { [item: string]: string } => {
+  public getHashValues = (): IKeyValue[] => {
     const array = objectToArrayOfStrings(
       JSONHashValuesService.isJSON(this.input)
         ? JSON.parse(this.input)
         : {...this.input.split(this.NEWLINE_REGEXP)},
     )
 
-    const result = array.map((item) => ({
-      key: item,
+    return array.map((item) => ({
+      key: `h${hasha(item, { algorithm: 'md5' })}`,
       value: item,
     }))
-
-    return Object.assign(
-      {},
-      ...result.map(item => ({
-        [item.key]: item.value,
-      })),
-    )
   }
 }
