@@ -1,9 +1,13 @@
 export interface Provider {
-  id: 'yandex' | 'google' | 'microsoft'
+  id: 'dummy' | 'yandex' | 'google' | 'microsoft'
   name: string
 }
 
 export const providers: ({ [key: string]: Provider }) = {
+  dummy: {
+    id: 'dummy',
+    name: 'Dummy',
+  },
   yandex: {
     id: 'yandex',
     name: 'Yandex',

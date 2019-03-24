@@ -1,6 +1,7 @@
 import { from, of, Subscription } from 'rxjs'
 import { ajax } from 'rxjs/ajax'
 import { map, tap, concatMap, mergeMap, catchError, delay, count, share, scan, withLatestFrom } from 'rxjs/operators'
+import { Provider } from '../../types/Provider'
 
 export interface ITranslateService {
   translate: (text: string) => void
