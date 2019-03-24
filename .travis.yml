@@ -8,7 +8,9 @@ stages:
 
 jobs:
   include:
-    - stage: test
+    - name: lint
+      stage: test
       script: yarn lint
-    - stage: test
+    - name: test
+      stage: test
       script: yarn test
