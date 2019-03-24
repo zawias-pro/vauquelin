@@ -21,7 +21,7 @@ interface AppState {
 
 class App extends React.Component<{}, AppState> {
   public state = {
-    inputJson: 'a b c d',
+    inputJson: 'a\nb\nc\nd',
     outputJson: '',
     provider: DEFAULT_PROVIDER,
     useCustomApiKey: false,
@@ -63,15 +63,11 @@ class App extends React.Component<{}, AppState> {
   }
 
   public translateOnClick = () => {
-    new TranslateService().translate(this.state.inputJson, (response: any) => {
+    new TranslateService().translate(this.state.inputJson, (response: string) => {
       this.setState({
         outputJson: response,
       })
     })
-
-    this.setState(prevState => ({
-      outputJson: '',
-    }))
   }
 
   public render() {
