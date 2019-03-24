@@ -3,12 +3,12 @@ import Grid from '@material-ui/core/Grid'
 
 import { TopBar } from './components/TopBar'
 import { DEFAULT_PROVIDER } from '../config'
-import { Provider } from '../types/Provider'
-import { i18nInit } from '../translations/i18nInit'
+import { Provider } from './types/Provider'
+import { i18nInit } from './translations/i18nInit'
 import { getProviderById } from './getProviderById'
-import { TranslateService } from './TranslateService'
 import { InputSection } from './components/InputSection'
 import { OutputSection } from './components/OutputSection'
+import { TranslateService } from './service/TranslateService'
 import { TranslateFormSection } from './components/TranslateFormSection'
 
 interface AppState {

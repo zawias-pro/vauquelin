@@ -4,12 +4,12 @@ import _isArray from 'lodash/isArray'
 import _flattenDeep from 'lodash/flattenDeep'
 
 export const objectToArrayOfStrings = (input: {} | []): string[] => {
-  const object = Array.isArray(input) ? {...input} : input
+  const object: {} = Array.isArray(input) ? {...input} : input
   const result: string[] = []
 
   Object.values(object).forEach((value) => {
     if (_isString(value)) {
-      result.push(value)
+      result.push(value.trim())
     }
     if (_isObject(value) || _isArray(value)) {
       const arr = objectToArrayOfStrings(value)
