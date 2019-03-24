@@ -28,8 +28,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "lint": "tslint --project .",
-    "serve": "node serve.js"
+    "lint": "tslint --project ."
   },
   "browserslist": [
     ">0.2%",
