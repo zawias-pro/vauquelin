@@ -10,9 +10,9 @@ stages:
 
 jobs:
   include:
-    - name: lint
+    - name: "Linter"
       stage: test
       script: yarn lint
-    - name: test
+    - name: "Unit tests"
       stage: test
       script: yarn test
