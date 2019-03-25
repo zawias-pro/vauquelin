@@ -1,13 +1,32 @@
 import { from, of } from 'rxjs'
-import { mergeMap, delay, map, scan, combineAll, tap, share } from 'rxjs/operators'
+import { mergeMap, delay, map, scan, combineAll, share } from 'rxjs/operators'
+
 import { JSONHashValuesService } from '../JSONHashValuesService'
 
+interface TranslationObject {
+  key: string
+  original: string
+  translated: string
+}
+
+interface IProgress {
+  current: TranslationObject,
+  done: number,
+  all: number,
+}
+
+type TranslateMethod = (
+  text: string,
+  onFinish: (result: string) => any,
+  progressOnChange?: (progress: IProgress) => any,
+) => void
+
 export interface ITranslateService {
-  translate: (text: string, onFinish: any) => void
+  translate: TranslateMethod
 }
 
 class TranslateService implements ITranslateService {
-  public translate = (text: string, onFinish: (response: string) => any): void => {
+  public translate: TranslateMethod = (text, onFinish, progressOnChange): void => {
     const inputArray = new JSONHashValuesService(text).getHashValues()
     const item$ = from(inputArray).pipe(
       mergeMap(x => of({
@@ -22,9 +41,18 @@ class TranslateService implements ITranslateService {
     )
 
     const progress$ = item$.pipe(
-      map(_ => 1),
-      scan((acc: number) => acc + 1, 0),
-      map(val => Math.ceil((val / inputArray.length) * 100)),
+      scan(
+        (acc: IProgress, current: TranslationObject) => ({
+          current,
+          done: acc.done + 1,
+          all: inputArray.length,
+        }),
+        {
+          current: { key: '', original: '', translated: '' },
+          done: 0,
+          all: inputArray.length,
+        },
+      ),
     )
 
     const response$ = item$.pipe(
@@ -32,7 +60,7 @@ class TranslateService implements ITranslateService {
       combineAll(),
     )
 
-    progress$.subscribe(x => console.log(`${x}%`))
+    progress$.subscribe(progressOnChange)
     response$.subscribe(result => onFinish(JSON.stringify(result)))
   }
 }
