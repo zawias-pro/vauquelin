@@ -5,9 +5,11 @@ import { TopBar } from './components/TopBar'
 import { DEFAULT_PROVIDER } from '../config'
 import { Provider } from './types/Provider'
 import { i18nInit } from './translations/i18nInit'
+import { IProgress } from './interfaces/IProgress'
 import { getProviderById } from './getProviderById'
 import { InputSection } from './components/InputSection'
 import { OutputSection } from './components/OutputSection'
+import { ProgressModal } from './components/ProgressModal'
 import { TranslateService } from './service/TranslateService'
 import { TranslateFormSection } from './components/TranslateFormSection'
 
@@ -17,15 +19,17 @@ interface AppState {
   provider: Provider
   useCustomApiKey: boolean
   apiKey: string
+  progress: IProgress | null,
 }
 
 class App extends React.Component<{}, AppState> {
   public state = {
-    inputJson: 'a\nb\nc\nd',
+    inputJson: 'a\nb\nc\nd\ne\nf\ng\nh',
     outputJson: '',
     provider: DEFAULT_PROVIDER,
     useCustomApiKey: false,
     apiKey: '',
+    progress: null,
   }
 
   private translator: TranslateService
@@ -62,12 +66,25 @@ class App extends React.Component<{}, AppState> {
     })
   }
 
-  public translateOnClick = () => {
-    new TranslateService().translate(this.state.inputJson, (response: string) => {
-      this.setState({
-        outputJson: response,
-      })
+  public onFinish = (response: string) => {
+    this.setState({
+      outputJson: response,
+      progress: null,
     })
+  }
+
+  public progressOnChange = (progress: IProgress) => {
+    this.setState({
+      progress,
+    })
+  }
+
+  public translateOnClick = () => {
+    new TranslateService().translate(
+      this.state.inputJson,
+      this.onFinish,
+      this.progressOnChange,
+    )
   }
 
   public render() {
@@ -98,6 +115,7 @@ class App extends React.Component<{}, AppState> {
             </Grid>
           </Grid>
         </div>
+        <ProgressModal progress={this.state.progress} />
       </>
     )
   }

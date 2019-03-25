@@ -1,19 +1,9 @@
 import { from, of } from 'rxjs'
 import { mergeMap, delay, map, scan, combineAll, share } from 'rxjs/operators'
 
+import { IProgress } from '../../interfaces/IProgress'
 import { JSONHashValuesService } from '../JSONHashValuesService'
-
-interface TranslationObject {
-  key: string
-  original: string
-  translated: string
-}
-
-interface IProgress {
-  current: TranslationObject,
-  done: number,
-  all: number,
-}
+import { TranslationObject } from '../../interfaces/ITranslationObject'
 
 type TranslateMethod = (
   text: string,
@@ -34,10 +24,16 @@ class TranslateService implements ITranslateService {
           original: x.value,
           translated: `translated ${x.value}`,
       }).pipe(
-          delay(Math.random() * 1000),
+          delay(Math.random() * 3000),
         ),
       ),
       share(),
+    )
+
+    const response$ = item$.pipe(
+      map(x => of(x)),
+      combineAll(),
+      map(x => JSON.stringify(x)),
     )
 
     const progress$ = item$.pipe(
@@ -45,7 +41,7 @@ class TranslateService implements ITranslateService {
         (acc: IProgress, current: TranslationObject) => ({
           current,
           done: acc.done + 1,
-          all: inputArray.length,
+          all: acc.all,
         }),
         {
           current: { key: '', original: '', translated: '' },
@@ -55,13 +51,8 @@ class TranslateService implements ITranslateService {
       ),
     )
 
-    const response$ = item$.pipe(
-      map(x => of(x)),
-      combineAll(),
-    )
-
     progress$.subscribe(progressOnChange)
-    response$.subscribe(result => onFinish(JSON.stringify(result)))
+    response$.subscribe(onFinish)
   }
 }
 
