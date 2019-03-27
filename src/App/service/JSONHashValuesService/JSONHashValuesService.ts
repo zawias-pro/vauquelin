@@ -14,18 +14,11 @@ export class JSONHashValuesService {
     }
   }
 
-  private NEWLINE_REGEXP: RegExp = /\r?\n|\r/g
-  private input: string
-
-  constructor(input: string) {
-    this.input = input
-  }
-
-  public getHashValues = (): IKeyValue[] => {
+  public static getHashValues = (input: string): IKeyValue[] => {
     const array = objectToArrayOfStrings(
-      JSONHashValuesService.isJSON(this.input)
-        ? JSON.parse(this.input)
-        : {...this.input.split(this.NEWLINE_REGEXP)},
+      JSONHashValuesService.isJSON(input)
+        ? JSON.parse(input)
+        : {...input.split(JSONHashValuesService.NEWLINE_REGEXP)},
     )
 
     return array.map((item) => ({
@@ -33,4 +26,6 @@ export class JSONHashValuesService {
       value: item,
     }))
   }
+
+  private static NEWLINE_REGEXP: RegExp = /\r?\n|\r/g
 }

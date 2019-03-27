@@ -15,19 +15,22 @@ type TranslateMethod = (
 
 class TranslateService {
   public static translate: TranslateMethod = (state, onFinish, progressOnChange): void => {
-    const inputArray = new JSONHashValuesService(state.inputJson).getHashValues()
-    const item$ = from(inputArray).pipe(
+    const inputArray = JSONHashValuesService.getHashValues(state.inputJson)
+
+    const item$ = from(inputArray)
+
+    const request$ = item$.pipe(
       mergeMap(x => translateRequest(x, state)),
       share(),
     )
 
-    const response$ = item$.pipe(
+    const result$ = request$.pipe(
       map(x => of(x)),
       combineAll(),
       map(x => JSON.stringify(x)),
     )
 
-    const progress$ = item$.pipe(
+    const progress$ = request$.pipe(
       scan(
         (acc: IProgress, current: ITranslationObject) => ({
           current,
@@ -43,7 +46,7 @@ class TranslateService {
     )
 
     progress$.subscribe(progressOnChange)
-    response$.subscribe(onFinish)
+    result$.subscribe(onFinish)
   }
 }
 
