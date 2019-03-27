@@ -13,7 +13,7 @@ import { ProgressModal } from './components/ProgressModal'
 import { TranslateService } from './service/TranslateService'
 import { TranslateFormSection } from './components/TranslateFormSection'
 
-interface AppState {
+export interface AppState {
   inputJson: string
   outputJson: string
   provider: Provider
@@ -32,13 +32,10 @@ class App extends React.Component<{}, AppState> {
     progress: null,
   }
 
-  private translator: TranslateService
-
   constructor(props: {}) {
     super(props)
 
     i18nInit()
-    this.translator = new TranslateService()
   }
 
   public onInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -80,8 +77,8 @@ class App extends React.Component<{}, AppState> {
   }
 
   public translateOnClick = () => {
-    new TranslateService().translate(
-      this.state.inputJson,
+    TranslateService.translate(
+      this.state,
       this.onFinish,
       this.progressOnChange,
     )

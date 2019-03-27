@@ -7,8 +7,9 @@ import TextField from '@material-ui/core/TextField'
 import FormLabel from '@material-ui/core/FormLabel'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControl from '@material-ui/core/FormControl'
-import { Provider, providers } from '../../types/Provider'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
+
+import { Provider, providers } from '../../types/Provider'
 
 interface TranslateFormSectionProps {
   provider: Provider
@@ -49,10 +50,28 @@ const TranslateFormSection: React.FunctionComponent<TranslateFormSectionProps> =
           value={provider.id}
           onChange={providerOnChange}
         >
-          <FormControlLabel value={providers.dummy.id} control={<Radio/>} label={providers.dummy.name} />
-          <FormControlLabel value={providers.yandex.id} control={<Radio/>} label={providers.yandex.name} />
-          <FormControlLabel value={providers.microsoft.id} control={<Radio/>} label={providers.microsoft.name} />
-          <FormControlLabel value={providers.google.id} control={<Radio/>} label={providers.google.name} />
+          <FormControlLabel
+              value={providers.dummy.id}
+              control={<Radio/>}
+              label={providers.dummy.name}
+          />
+          <FormControlLabel
+              value={providers.yandex.id}
+              control={<Radio/>}
+              label={providers.yandex.name}
+          />
+          <FormControlLabel
+              disabled
+              value={providers.microsoft.id}
+              control={<Radio/>}
+              label={providers.microsoft.name}
+          />
+          <FormControlLabel
+              disabled
+              value={providers.google.id}
+              control={<Radio/>}
+              label={providers.google.name}
+          />
         </RadioGroup>
         <FormControlLabel
           control={useCustomApiKeySwitcher}

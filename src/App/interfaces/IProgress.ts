@@ -1,7 +1,7 @@
-import { TranslationObject } from './ITranslationObject'
+import { ITranslationObject } from './ITranslationObject'
 
 export interface IProgress {
-  current: TranslationObject
+  current: ITranslationObject
   done: number
   all: number
 }
