@@ -1,10 +1,7 @@
-import { objectToArrayOfStrings } from './objectToArrayOfStrings'
 import hasha from 'hasha'
 
-interface IKeyValue {
-  key: string
-  value: string
-}
+import { IKeyValue } from '../../interfaces/IKeyValue'
+import { objectToArrayOfStrings } from './objectToArrayOfStrings'
 
 export class JSONHashValuesService {
   public static isJSON = (input: string) => {
