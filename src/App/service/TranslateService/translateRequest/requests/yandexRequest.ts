@@ -1,5 +1,6 @@
-import { map } from 'rxjs/operators'
-import { ajax, AjaxResponse } from 'rxjs/ajax'
+import { of } from 'rxjs'
+import { catchError, map } from 'rxjs/operators'
+import { ajax, AjaxError, AjaxResponse } from 'rxjs/ajax'
 
 import { TranslateRequestType } from '../translateRequest'
 
@@ -16,7 +17,12 @@ const yandexRequest: TranslateRequestType = (input, state) => {
     map((response: AjaxResponse) => ({
       key: input.key,
       original: input.value,
-      translated: response.response.text,
+      translated: response.response.text[0],
+    })),
+    catchError((error: AjaxError) => of({
+      key: input.key,
+      original: input.value,
+      translated: `error: ${error}`,
     })),
   )
 }
