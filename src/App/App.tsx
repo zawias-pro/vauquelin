@@ -12,6 +12,7 @@ import { OutputSection } from './components/OutputSection'
 import { ProgressModal } from './components/ProgressModal'
 import { TranslateService } from './service/TranslateService'
 import { TranslateFormSection } from './components/TranslateFormSection'
+import { isJSON } from "./utils/isJSON";
 
 export interface AppState {
   inputJson: string
@@ -95,11 +96,23 @@ class App extends React.Component<{}, AppState> {
   }
 
   public translateOnClick = () => {
-    TranslateService.translate(
-      this.state,
-      this.onFinish,
-      this.progressOnChange,
+    const createJSONFromString = (input: string) => JSON.stringify(
+      {...input.split(/\r?\n|\r/g)},
+      null,
+      2,
     )
+
+    this.setState(prevState => ({
+      inputJson: !isJSON(prevState.inputJson)
+        ? createJSONFromString(prevState.inputJson)
+        : prevState.inputJson,
+    }), () => {
+      TranslateService.translate(
+        this.state,
+        this.onFinish,
+        this.progressOnChange,
+      )
+    })
   }
 
   public render() {
