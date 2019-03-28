@@ -38,6 +38,16 @@ class App extends React.Component<{}, AppState> {
     i18nInit()
   }
 
+  public componentDidMount(): void {
+    const storedApiKey = localStorage.getItem(`vauquelin.${this.state.provider.id}.key`)
+
+    if (storedApiKey) {
+      this.setState({
+        apiKey: storedApiKey,
+      })
+    }
+  }
+
   public onInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     this.setState({
       inputJson: event.target.value,
@@ -45,15 +55,23 @@ class App extends React.Component<{}, AppState> {
   }
 
   public providerOnChange = (event: React.ChangeEvent<{}>, value: string): void => {
+    const newProvider = getProviderById(value)
+    const storedApiKey = localStorage.getItem(`vauquelin.${newProvider.id}.key`)
+
     this.setState({
-      provider: getProviderById(value),
+      provider: newProvider,
+      apiKey: storedApiKey || '',
     })
   }
 
   public apiKeyOnChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const newKey = event.target.value
+
     this.setState({
       useCustomApiKey: true,
-      apiKey: event.target.value,
+      apiKey: newKey,
+    }, () => {
+      localStorage.setItem(`vauquelin.${this.state.provider.id}.key`, newKey)
     })
   }
 
