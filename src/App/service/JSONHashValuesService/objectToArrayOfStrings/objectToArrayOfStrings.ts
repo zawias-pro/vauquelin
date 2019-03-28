@@ -1,6 +1,6 @@
+import _isArray from 'lodash/isArray'
 import _isString from 'lodash/isString'
 import _isObject from 'lodash/isObject'
-import _isArray from 'lodash/isArray'
 import _flattenDeep from 'lodash/flattenDeep'
 
 export const objectToArrayOfStrings = (input: {} | []): string[] => {

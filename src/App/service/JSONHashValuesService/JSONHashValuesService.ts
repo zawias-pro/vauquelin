@@ -1,4 +1,5 @@
 import hasha from 'hasha'
+import _uniqBy from 'lodash/uniqBy'
 
 import { IKeyValue } from '../../interfaces/IKeyValue'
 import { objectToArrayOfStrings } from './objectToArrayOfStrings'
@@ -21,10 +22,12 @@ export class JSONHashValuesService {
         : {...input.split(JSONHashValuesService.NEWLINE_REGEXP)},
     )
 
-    return array.map((item) => ({
-      key: `h${hasha(item, { algorithm: 'md5' })}`,
+    const keyValuePairs = array.map((item) => ({
+      key: hasha(item, { algorithm: 'md5' }),
       value: item,
     }))
+
+    return _uniqBy(keyValuePairs, 'key')
   }
 
   private static NEWLINE_REGEXP: RegExp = /\r?\n|\r/g
