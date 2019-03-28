@@ -1,5 +1,5 @@
 export interface ITranslationObject {
-  key: string
+  hash: string
   original: string
   translated: string
 }

@@ -1,18 +1,18 @@
 import hasha from 'hasha'
 import _uniqBy from 'lodash/uniqBy'
 
-import { IKeyValue } from '../../interfaces/IKeyValue'
+import { IHashValue } from '../../interfaces/IHashValue'
 import { objectToArrayOfStrings } from './objectToArrayOfStrings'
 
 export class JSONHashValuesService {
-  public static getHashValues = (input: string): IKeyValue[] => {
+  public static getHashValues = (input: string): IHashValue[] => {
     const array = objectToArrayOfStrings(JSON.parse(input))
 
-    const keyValuePairs = array.map((item) => ({
-      key: hasha(item, { algorithm: 'md5' }),
+    const hashValuePairs = array.map((item) => ({
+      hash: hasha(item, { algorithm: 'md5' }),
       value: item,
     }))
 
-    return _uniqBy(keyValuePairs, 'key')
+    return _uniqBy(hashValuePairs, 'hash')
   }
 }

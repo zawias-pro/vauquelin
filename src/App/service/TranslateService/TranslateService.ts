@@ -38,7 +38,7 @@ class TranslateService {
           all: acc.all,
         }),
         {
-          current: { key: '', original: '', translated: '' },
+          current: { hash: '', original: '', translated: '' },
           done: 0,
           all: inputArray.length,
         },

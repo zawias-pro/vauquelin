@@ -15,12 +15,12 @@ const yandexRequest: TranslateRequestType = (input, state) => {
     text: input.value,
   }).pipe(
     map((response: AjaxResponse) => ({
-      key: input.key,
+      hash: input.hash,
       original: input.value,
       translated: response.response.text[0],
     })),
     catchError((error: AjaxError) => of({
-      key: input.key,
+      hash: input.hash,
       original: input.value,
       translated: `error: ${error}`,
     })),
