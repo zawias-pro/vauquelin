@@ -1,9 +1,10 @@
 import * as React from 'react'
 import Grid from '@material-ui/core/Grid'
 
+import { isJSON } from './utils/isJSON'
+import { Provider } from './types/Provider'
 import { TopBar } from './components/TopBar'
 import { DEFAULT_PROVIDER } from '../config'
-import { Provider } from './types/Provider'
 import { i18nInit } from './translations/i18nInit'
 import { IProgress } from './interfaces/IProgress'
 import { getProviderById } from './getProviderById'
@@ -12,7 +13,6 @@ import { OutputSection } from './components/OutputSection'
 import { ProgressModal } from './components/ProgressModal'
 import { TranslateService } from './service/TranslateService'
 import { TranslateFormSection } from './components/TranslateFormSection'
-import { isJSON } from "./utils/isJSON";
 
 export interface AppState {
   inputJson: string
