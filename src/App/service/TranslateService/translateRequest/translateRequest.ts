@@ -1,7 +1,6 @@
 import { Observable } from 'rxjs'
 
 import { AppState } from '../../../App'
-import { providers } from '../../../types/Provider'
 import { dummyRequest } from './requests/dummyRequest'
 import { yandexRequest } from './requests/yandexRequest'
 import { ITranslationObject } from '../../../interfaces/ITranslationObject'
@@ -10,9 +9,9 @@ export type TranslateRequestType = (input: string, state: AppState) => Observabl
 
 export const translateRequest: TranslateRequestType = (input, state) => {
   switch (state.provider.id) {
-    case providers.yandex.id:
+    case 'yandex':
       return yandexRequest(input, state)
-    case providers.dummy.id:
+    case 'dummy':
     default:
       return dummyRequest(input, state)
   }
