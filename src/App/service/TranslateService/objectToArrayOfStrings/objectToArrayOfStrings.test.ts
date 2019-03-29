@@ -5,12 +5,7 @@ describe('objectToArrayOfStrings', () => {
   it('should return array of the values', () => {
     const result = objectToArrayOfStrings(testObject)
 
-    expect(result).toMatchObject([
-      'string1',
-      'string2',
-      'string3',
-      'string4',
-    ])
+    expect(result).toMatchObject(['string1', 'string2', 'string3', 'string4'])
   })
 
   it('should trim the values', () => {
@@ -18,8 +13,15 @@ describe('objectToArrayOfStrings', () => {
       key: '    value    ',
     })
 
-    expect(result).toMatchObject([
-      'value',
-    ])
+    expect(result).toMatchObject(['value'])
+  })
+
+  it('should remove dulicates', () => {
+    const result = objectToArrayOfStrings({
+      key1: 'value',
+      key2: 'value',
+    })
+
+    expect(result).toMatchObject(['value'])
   })
 })

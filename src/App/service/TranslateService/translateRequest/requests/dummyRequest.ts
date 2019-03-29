@@ -5,9 +5,8 @@ import { TranslateRequestType } from '../translateRequest'
 
 const dummyRequest: TranslateRequestType = (input, _) => {
     return of({
-        hash: input.hash,
-        original: input.value,
-        translated: `translated ${input.value}`,
+        original: input,
+        translated: `translated ${input}`,
     }).pipe(
         delay(Math.random() * 3000),
     )

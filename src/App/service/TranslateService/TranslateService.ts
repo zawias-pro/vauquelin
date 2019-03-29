@@ -4,18 +4,18 @@ import { mergeMap, map, scan, combineAll, share } from 'rxjs/operators'
 import { AppState } from '../../App'
 import { translateRequest } from './translateRequest'
 import { IProgress } from '../../interfaces/IProgress'
-import { JSONHashValuesService } from '../JSONHashValuesService'
+import { objectToArrayOfStrings } from './objectToArrayOfStrings'
 import { ITranslationObject } from '../../interfaces/ITranslationObject'
 
-type TranslateMethod = (
+type TranslateMethodType = (
   state: AppState,
   onFinish: (result: string) => any,
   progressOnChange?: (progress: IProgress) => any,
 ) => void
 
 class TranslateService {
-  public static translate: TranslateMethod = (state, onFinish, progressOnChange): void => {
-    const inputArray = JSONHashValuesService.getHashValues(state.inputJson)
+  public static translate: TranslateMethodType = (state, onFinish, progressOnChange): void => {
+    const inputArray = objectToArrayOfStrings(JSON.parse(state.inputJson))
 
     const item$ = from(inputArray)
 
@@ -27,7 +27,7 @@ class TranslateService {
     const result$ = request$.pipe(
       map(x => of(x)),
       combineAll(),
-      map(x => JSON.stringify(x)),
+      map(x => JSON.stringify(x, null, 2)),
     )
 
     const progress$ = request$.pipe(
@@ -38,7 +38,7 @@ class TranslateService {
           all: acc.all,
         }),
         {
-          current: { hash: '', original: '', translated: '' },
+          current: { original: '', translated: '' },
           done: 0,
           all: inputArray.length,
         },

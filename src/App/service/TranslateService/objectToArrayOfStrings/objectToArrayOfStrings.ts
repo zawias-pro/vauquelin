@@ -1,3 +1,4 @@
+import _uniq from 'lodash/uniq'
 import _isArray from 'lodash/isArray'
 import _isString from 'lodash/isString'
 import _isObject from 'lodash/isObject'
@@ -19,5 +20,5 @@ export const objectToArrayOfStrings = (input: {} | []): string[] => {
     }
   })
 
-  return result
+  return _uniq(result)
 }

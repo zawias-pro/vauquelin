@@ -12,16 +12,14 @@ const yandexRequest: TranslateRequestType = (input, state) => {
     : process.env.YANDEX_API_KEY
 
   return ajax.post(`${URL}?key=${API_KEY}&lang=pl`, {
-    text: input.value,
+    text: input,
   }).pipe(
     map((response: AjaxResponse) => ({
-      hash: input.hash,
-      original: input.value,
+      original: input,
       translated: response.response.text[0],
     })),
     catchError((error: AjaxError) => of({
-      hash: input.hash,
-      original: input.value,
+      original: input,
       translated: `error: ${error}`,
     })),
   )
