@@ -6,6 +6,7 @@ import { translateRequest } from './translateRequest'
 import { IProgress } from '../../interfaces/IProgress'
 import { objectToArrayOfStrings } from './objectToArrayOfStrings'
 import { ITranslationObject } from '../../interfaces/ITranslationObject'
+import { replaceValuesWithTranslations } from "./replaceValuesWithTranslations/replaceValuesWithTranslations";
 
 type TranslateMethodType = (
   state: AppState,
@@ -20,14 +21,14 @@ class TranslateService {
     const item$ = from(inputArray)
 
     const request$ = item$.pipe(
-      mergeMap(x => translateRequest(x, state)),
+      mergeMap(item => translateRequest(item, state)),
       share(),
     )
 
     const result$ = request$.pipe(
-      map(x => of(x)),
+      map(response => of(response)),
       combineAll(),
-      map(x => JSON.stringify(x, null, 2)),
+      map((translations: ITranslationObject[]) => replaceValuesWithTranslations(state.inputJson, translations)),
     )
 
     const progress$ = request$.pipe(

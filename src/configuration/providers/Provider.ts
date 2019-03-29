@@ -9,20 +9,17 @@ export const providers: Provider[] = [
     id: 'dummy',
     name: 'Dummy',
     enabled: true,
-  },
-  {
+  }, {
     id: 'yandex',
     name: 'Yandex',
     enabled: true,
-  },
-  {
-    id: 'google',
-    name: 'Google',
-    enabled: false,
-  },
-  {
+  }, {
     id: 'microsoft',
     name: 'Microsoft',
+    enabled: true,
+  }, {
+    id: 'google',
+    name: 'Google',
     enabled: false,
   },
 ]

@@ -50,7 +50,13 @@ const TranslateFormSection: React.FunctionComponent<TranslateFormSectionProps> =
           onChange={providerOnChange}
         >
           {providers.map((p: Provider) => (
-            <FormControlLabel value={p.id} control={<Radio/>} label={p.name} disabled={!p.enabled} />
+            <FormControlLabel
+              key={p.id}
+              value={p.id}
+              control={<Radio/>}
+              label={p.name}
+              disabled={!p.enabled}
+            />
           ))}
         </RadioGroup>
         <FormControlLabel

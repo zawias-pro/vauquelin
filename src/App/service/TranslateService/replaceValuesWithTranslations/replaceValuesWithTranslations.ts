@@ -5,11 +5,15 @@ import { ITranslationObject } from '../../../interfaces/ITranslationObject'
 export const replaceValuesWithTranslations = (inputJSON: string, translations: ITranslationObject[]) => {
   const modified = JSON.parse(inputJSON, (key, value) => {
     if (_isString(value)) {
-      return 'translated'
+      const found = translations.find(item => item.original === value)
+
+      if (found) {
+        return found.translated
+      }
     }
 
     return value
   })
 
-  return JSON.stringify(modified)
+  return JSON.stringify(modified, null, 2)
 }

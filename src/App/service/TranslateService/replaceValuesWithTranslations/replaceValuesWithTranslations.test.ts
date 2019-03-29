@@ -44,6 +44,7 @@ describe('replaceValuesWithTranslations', () => {
       prop3: [
         'translated3',
         1,
+        null,
         [
           'translated4',
         ],
