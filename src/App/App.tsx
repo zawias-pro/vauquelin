@@ -138,7 +138,10 @@ class App extends React.Component<{}, AppState> {
               />
             </Grid>
             <Grid item xs={5}>
-              <OutputSection value={this.state.outputJson}/>
+              <OutputSection
+                value={this.state.outputJson}
+                provider={this.state.provider}
+              />
             </Grid>
           </Grid>
         </div>
