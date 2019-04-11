@@ -24,7 +24,7 @@ export interface AppState {
 
 class App extends React.Component<{}, AppState> {
   public state = {
-    inputJson: 'a\nb\nc\nd\ne\nf\ng\nh',
+    inputJson: '',
     outputJson: '',
     provider: DEFAULT_PROVIDER,
     useCustomApiKey: false,

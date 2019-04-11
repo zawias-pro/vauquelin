@@ -37,9 +37,9 @@ const TranslateFormSection: React.FunctionComponent<TranslateFormSectionProps> =
     <Paper style={{padding: 16}}>
       <div style={{textAlign: 'center', marginBottom: 24}}>
         <Button
-          variant="contained"
-          color="primary"
-          onClick={translateOnClick}
+            variant="contained"
+            color="primary"
+            onClick={translateOnClick}
         >
           {t('translate-form.translate')}
         </Button>
@@ -49,31 +49,30 @@ const TranslateFormSection: React.FunctionComponent<TranslateFormSectionProps> =
           {t('translate-form.translation-provider')}
         </FormLabel>
         <RadioGroup
-          aria-label={t('translate-form.translation-provider')}
-          value={provider.id}
-          onChange={providerOnChange}
+            aria-label={t('translate-form.translation-provider')}
+            value={provider.id}
+            onChange={providerOnChange}
         >
-          {providers.map((p: Provider) => (
+          {providers.map((p: Provider) => p.enabled ? (
             <FormControlLabel
-              key={p.id}
-              value={p.id}
-              control={<Radio/>}
-              label={p.name}
-              disabled={!p.enabled}
+                key={p.id}
+                value={p.id}
+                control={<Radio/>}
+                label={p.name}
             />
-          ))}
+          ) : null)}
         </RadioGroup>
         <FormControlLabel
-          control={useCustomApiKeySwitcher}
-          label={t('translate-form.use-custom-api-key')}
+            control={useCustomApiKeySwitcher}
+            label={t('translate-form.use-custom-api-key')}
         />
         <TextField
-          label={t('translate-form.custom-api-key')}
-          fullWidth
-          margin="normal"
-          value={apiKey}
-          onChange={apiKeyOnChange}
-          disabled={!useCustomApiKey}
+            label={t('translate-form.custom-api-key')}
+            fullWidth
+            margin="normal"
+            value={apiKey}
+            onChange={apiKeyOnChange}
+            disabled={!useCustomApiKey}
         />
       </FormControl>
     </Paper>

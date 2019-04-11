@@ -8,7 +8,7 @@ export const providers: Provider[] = [
   {
     id: 'dummy',
     name: 'Dummy',
-    enabled: true,
+    enabled: process.env.NODE_ENV === 'development',
   }, {
     id: 'yandex',
     name: 'Yandex',
@@ -24,4 +24,4 @@ export const providers: Provider[] = [
   },
 ]
 
-export const DEFAULT_PROVIDER = providers[0]
+export const DEFAULT_PROVIDER = providers[0].enabled ? providers[0] : providers[1]
