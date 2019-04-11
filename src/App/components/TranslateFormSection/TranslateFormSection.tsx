@@ -3,6 +3,7 @@ import Radio from '@material-ui/core/Radio'
 import Paper from '@material-ui/core/Paper'
 import Switch from '@material-ui/core/Switch'
 import Button from '@material-ui/core/Button'
+import { useTranslation } from 'react-i18next'
 import TextField from '@material-ui/core/TextField'
 import FormLabel from '@material-ui/core/FormLabel'
 import RadioGroup from '@material-ui/core/RadioGroup'
@@ -29,6 +30,7 @@ const TranslateFormSection: React.FunctionComponent<TranslateFormSectionProps> =
   useCustomApiKeyOnChange,
   translateOnClick,
 }) => {
+  const { t } = useTranslation()
   const useCustomApiKeySwitcher = <Switch checked={useCustomApiKey} onChange={useCustomApiKeyOnChange}/>
 
   return (
@@ -39,13 +41,15 @@ const TranslateFormSection: React.FunctionComponent<TranslateFormSectionProps> =
           color="primary"
           onClick={translateOnClick}
         >
-          Translate
+          {t('translate-form.translate')}
         </Button>
       </div>
       <FormControl>
-        <FormLabel component="data">Translation provider</FormLabel>
+        <FormLabel component="data">
+          {t('translate-form.translation-provider')}
+        </FormLabel>
         <RadioGroup
-          aria-label="Translation provider"
+          aria-label={t('translate-form.translation-provider')}
           value={provider.id}
           onChange={providerOnChange}
         >
@@ -61,10 +65,10 @@ const TranslateFormSection: React.FunctionComponent<TranslateFormSectionProps> =
         </RadioGroup>
         <FormControlLabel
           control={useCustomApiKeySwitcher}
-          label="Use custom API key"
+          label={t('translate-form.use-custom-api-key')}
         />
         <TextField
-          label="Custom API key"
+          label={t('translate-form.custom-api-key')}
           fullWidth
           margin="normal"
           value={apiKey}

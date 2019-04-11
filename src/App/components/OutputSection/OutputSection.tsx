@@ -1,5 +1,6 @@
 import * as React from 'react'
 import Paper from '@material-ui/core/Paper'
+import { useTranslation } from 'react-i18next'
 import TextField from '@material-ui/core/TextField'
 
 interface OutputSectionProps {
@@ -8,18 +9,23 @@ interface OutputSectionProps {
 
 const OutputSection: React.FunctionComponent<OutputSectionProps> = ({
   value,
-}) => (
-  <Paper style={{ padding: 16 }}>
-    <TextField
-      label="Output JSON"
-      multiline
-      fullWidth
-      onChange={() => { return }}
-      margin="normal"
-      variant="outlined"
-      value={value}
-    />
-  </Paper>
-)
+}) => {
+  const { t } = useTranslation()
+
+  return (
+    <Paper style={{padding: 16}}>
+      <TextField
+        label={t('output.output-json')}
+        multiline
+        fullWidth
+        onChange={() => { return }}
+        margin="normal"
+        variant="outlined"
+        value={value}
+        disabled={!value}
+      />
+    </Paper>
+  )
+}
 
 export { OutputSection }

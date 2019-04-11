@@ -2,5 +2,22 @@
   "application": {
     "name": "vauquelin",
     "description": "JSON translator"
+  },
+  "top-bar": {
+    "translate": "Translate",
+    "how-to-use": "How to use",
+    "about": "About"
+  },
+  "input": {
+    "input-json": "Input JSON"
+  },
+  "output": {
+    "output-json": "Output JSON"
+  },
+  "translate-form": {
+    "translate": "Translate",
+    "translation-provider": "Translation provider",
+    "use-custom-api-key": "Use custom API key",
+    "custom-api-key": "Custom API key"
   }
 }

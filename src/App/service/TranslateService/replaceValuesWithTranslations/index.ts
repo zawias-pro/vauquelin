@@ -1,0 +1,1 @@
+export { replaceValuesWithTranslations } from './replaceValuesWithTranslations'

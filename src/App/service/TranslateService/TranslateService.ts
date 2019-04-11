@@ -6,7 +6,7 @@ import { translateRequest } from './translateRequest'
 import { IProgress } from '../../interfaces/IProgress'
 import { objectToArrayOfStrings } from './objectToArrayOfStrings'
 import { ITranslationObject } from '../../interfaces/ITranslationObject'
-import { replaceValuesWithTranslations } from "./replaceValuesWithTranslations/replaceValuesWithTranslations";
+import { replaceValuesWithTranslations } from './replaceValuesWithTranslations'
 
 type TranslateMethodType = (
   state: AppState,
