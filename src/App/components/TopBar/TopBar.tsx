@@ -15,13 +15,7 @@ const TopBar: React.FunctionComponent = () => {
           {t('application.name')} - {t('application.description')}
         </Typography>
         <Button color="inherit">
-          {t('top-bar.translate')}
-        </Button>
-        <Button color="inherit">
           {t('top-bar.about')}
-        </Button>
-        <Button color="inherit">
-          {t('top-bar.how-to-use')}
         </Button>
       </Toolbar>
     </AppBar>

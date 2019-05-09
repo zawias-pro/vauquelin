@@ -9,7 +9,11 @@
     "about": "About"
   },
   "input": {
-    "input-json": "Input JSON"
+    "input-json": "Input JSON",
+    "input-language": "Input language",
+    "language": {
+      "auto": "auto"
+    }
   },
   "output": {
     "output-json": "Output JSON"

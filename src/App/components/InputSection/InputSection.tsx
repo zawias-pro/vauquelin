@@ -3,6 +3,8 @@ import Paper from '@material-ui/core/Paper'
 import { useTranslation } from 'react-i18next'
 import TextField from '@material-ui/core/TextField'
 
+import { LanguageSelect } from '../LanguageSelect'
+
 interface InputSectionProps {
   value: string
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
@@ -16,6 +18,7 @@ const InputSection: React.FunctionComponent<InputSectionProps> = ({
 
   return (
     <Paper style={{ padding: 16 }}>
+      <LanguageSelect />
       <TextField
         label={t('input.input-json')}
         multiline
