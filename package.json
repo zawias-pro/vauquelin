@@ -21,7 +21,7 @@
     "@types/react-dom": "16.8.3",
     "enzyme": "^3.9.0",
     "i18next": "^15.0.7",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-i18next": "^10.5.2",
